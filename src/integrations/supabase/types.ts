@@ -14,7 +14,71 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      authors: {
+        Row: {
+          bio: string | null
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      books: {
+        Row: {
+          author_id: string | null
+          book_file_url: string | null
+          cover_image_url: string | null
+          created_at: string
+          description: string | null
+          genres: string[] | null
+          id: string
+          publication_year: number | null
+          title: string
+        }
+        Insert: {
+          author_id?: string | null
+          book_file_url?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          genres?: string[] | null
+          id?: string
+          publication_year?: number | null
+          title: string
+        }
+        Update: {
+          author_id?: string | null
+          book_file_url?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          genres?: string[] | null
+          id?: string
+          publication_year?: number | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "books_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "authors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
